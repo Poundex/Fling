@@ -1,0 +1,35 @@
+version 'unspecified'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "net.poundex.fling.demo.TodoApp"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://oss.sonatype.org/content/repositories/snapshots"
+	}
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.4.3'
+	compile 'org.springframework:spring-context:4.1.7.RELEASE'
+//	compile 'org.codehaus.groovyfx:groovyfx:0.4.0'
+
+	compile project(':fling-javafx')
+
+//	compile "org.open-dolphin:dolphin-client:${dolphinVersion}"
+//	compile "org.open-dolphin:dolphin-client-javafx:${dolphinVersion}"
+
+	compile 'org.controlsfx:controlsfx:8.40.10'
+	compile 'de.jensd:fontawesomefx:8.6'
+
+	compile files( "/usr/lib/jvm/java-8-jdk" + "/jre/lib/ext/jfxrt.jar" )
+
+}

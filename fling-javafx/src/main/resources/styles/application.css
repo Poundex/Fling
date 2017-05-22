@@ -1,0 +1,45 @@
+
+.sidebar {
+	-fx-background-color: #030303;
+	-fx-text-base-color: #FFF;
+	-fx-text-fill: -fx-text-base-color;
+}
+
+.activityTree {
+	-fx-background-color: #030303;
+	-fx-text-base-color: #FFF;
+	-fx-text-fill: -fx-text-base-color;
+}
+
+.info {
+	-fx-background-color: rgb(255.0, 255.0, 255.0);
+	-fx-background-radius: 4.0;
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
+	1.5);
+	-fx-padding: 4 4 4 4;
+	-fx-spacing: 4;
+}
+.info-info {
+	-fx-text-base-color: #00c;
+	-fx-text-fill: -fx-text-base-color;
+	-fx-fill: -fx-text-base-color;
+}
+
+
+.info-success {
+	-fx-text-base-color: #0C0;
+	-fx-fill: -fx-text-base-color;
+	-fx-text-fill: -fx-text-base-color;
+}
+
+.info-warning {
+	-fx-text-base-color: #ffc800;
+	-fx-fill: -fx-text-base-color;
+	-fx-text-fill: -fx-text-base-color;
+}
+
+.info-error {
+	-fx-text-base-color: #C00;
+	-fx-fill: -fx-text-base-color;
+	-fx-text-fill: -fx-text-base-color;
+}
