@@ -6,6 +6,7 @@ import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.collections.FXCollections
 import javafx.scene.Node
+import javafx.scene.layout.VBox
 import net.poundex.fling.activity.ActivityService
 import net.poundex.fling.group.GroupService
 import net.poundex.fling.fx.SceneGraphBuilderHolder
@@ -55,7 +56,9 @@ class ActivityViewModel extends Model
 	{
 		FormGroup formCard = groupService.create(FormGroup)
 		formCard.model.cardContent = activity.view
-		viewContent.set(formCard.render(sceneGraphBuilderHolder.sceneGraphBuilder))
+		VBox content = new VBox(25)
+		content.children << formCard.render(sceneGraphBuilderHolder.sceneGraphBuilder)
+		viewContent.set(content)
 	}
 
 }

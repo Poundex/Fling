@@ -16,6 +16,7 @@ abstract class FlingApplication
 				'fling.application',
 				'net.poundex.fling.fx',
 				'net.poundex.fling.fx.ui',
+				'net.poundex.fling.fx.cell',
 				'net.poundex.fling.activity',
 				'net.poundex.fling.group',
 				*basePackages)

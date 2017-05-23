@@ -24,6 +24,9 @@ dependencies {
 
 	compile project(':fling-javafx')
 
+	compile group: 'com.netflix.feign', name: 'feign-core', version: '8.18.0'
+	compile group: 'com.netflix.feign', name: 'feign-gson', version: '8.18.0'
+
 //	compile "org.open-dolphin:dolphin-client:${dolphinVersion}"
 //	compile "org.open-dolphin:dolphin-client-javafx:${dolphinVersion}"
 

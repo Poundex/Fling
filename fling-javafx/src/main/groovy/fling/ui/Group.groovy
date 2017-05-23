@@ -23,6 +23,7 @@ abstract class Group<C extends Controller, V extends View, M extends Model>
 	Object render(SceneGraphBuilder sceneGraphBuilder)
 	{
 		Closure orig = view.viewBuilder
+		model.beforeViewRender()
 		orig.rehydrate(sceneGraphBuilder, orig.owner, orig.thisObject).call()
 	}
 }

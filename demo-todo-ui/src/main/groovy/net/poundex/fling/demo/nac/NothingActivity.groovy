@@ -2,6 +2,7 @@ package net.poundex.fling.demo.nac
 
 import fling.activity.Activity
 import fling.ui.Group
+import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -17,9 +18,9 @@ class NothingActivity implements Activity
 	private final NothingGroup nothingGroup
 
 	@Autowired
-	NothingActivity(NothingGroup nothingGroup)
+	NothingActivity(GroupService groupService)
 	{
-		this.nothingGroup = nothingGroup
+		this.nothingGroup = groupService.create(NothingGroup)
 	}
 
 	@Override

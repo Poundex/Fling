@@ -1,11 +1,10 @@
 package fling.application
 
 import groovyx.javafx.GroovyFX
-import groovyx.javafx.beans.FXBindable
 import net.poundex.fling.fx.SceneGraphBuilderHolder
+import net.poundex.fling.fx.cell.ListItemFactory
 import net.poundex.fling.fx.ui.main.MainGroup
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
@@ -18,14 +17,14 @@ class ApplicationWindow
 {
 	private final MainGroup mainGroup
 	private final SceneGraphBuilderHolder sceneGraphBuilderHolder
+	private final ListItemFactory listItemFactory
 	
-	@FXBindable String astring = "123"
-
 	@Autowired
-	ApplicationWindow(MainGroup mainGroup, SceneGraphBuilderHolder sceneGraphBuilderHolder)
+	ApplicationWindow(MainGroup mainGroup, SceneGraphBuilderHolder sceneGraphBuilderHolder, ListItemFactory listItemFactory)
 	{
 		this.mainGroup = mainGroup
 		this.sceneGraphBuilderHolder = sceneGraphBuilderHolder
+		this.listItemFactory = listItemFactory
 	}
 
 	@PostConstruct
@@ -34,6 +33,7 @@ class ApplicationWindow
 		Thread.start {
 			GroovyFX.start {
 				sceneGraphBuilderHolder.sceneGraphBuilder = delegate
+				registerFactory "listItem", listItemFactory
 
 				stage(title: 'Activity Runner', show: true, centerOnScreen: true) {
 					mainGroup.render(delegate)
