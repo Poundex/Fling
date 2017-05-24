@@ -1,4 +1,4 @@
-package net.poundex.fling.demo.todo.todoem
+package net.poundex.fling.demo.todo.todo
 
 import fling.activity.Activity
 import fling.ui.Group
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component
  * Created by poundex on 22/05/17.
  */
 @Component
-class TodoList implements Activity
+class TodoItemView implements Activity
 {
-	final String name = "TODOEM"
-	final String title = "Todo List"
+	final String name = "TODO"
+	final String title = "Todo Item"
 
 	private final GroupService groupService
 
 	@Autowired
-	TodoList(GroupService groupService)
+	TodoItemView(GroupService groupService)
 	{
 		this.groupService = groupService
 	}
@@ -26,6 +26,11 @@ class TodoList implements Activity
 	@Override
 	Group start(Object... args)
 	{
-		return groupService.create(TodoListGroup)
+		if (args.size() < 1 || ! args[0] instanceof Long)
+			groupService.create(TodoItemViewStarterGroup)
+		else
+			groupService.create(TodoItemViewGroup) { TodoItemViewModel model ->
+				model.todoItemID = args[0]
+			}
 	}
 }

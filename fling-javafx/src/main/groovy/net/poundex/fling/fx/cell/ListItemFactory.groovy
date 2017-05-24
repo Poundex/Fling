@@ -1,61 +1,40 @@
 package net.poundex.fling.fx.cell
 
 import groovy.transform.Canonical
-import groovyx.javafx.SceneGraphBuilder
 import javafx.scene.control.ListCell
 import javafx.scene.control.ListView
+import javafx.scene.input.MouseEvent
 import org.springframework.stereotype.Component
 
 /**
  * Created by poundex on 23/05/17.
  */
 @Component
-class ListItemFactory implements Factory
+class ListItemFactory extends AbstractFactory
 {
 	@Canonical
 	private static class ListItemHolder
 	{
-		SceneGraphBuilder sceneGraphBuilder
-		Object value
-		Map attributes
 		Closure<javafx.scene.Node> builder
-	}
-
-
-	@Override
-	boolean isLeaf()
-	{
-		return false
-	}
-
-	@Override
-	boolean isHandlesNodeChildren() {
-		return true
-	}
-
-	@Override
-	void onFactoryRegistration(FactoryBuilderSupport builder, String registeredName, String registeredGroupName) {
-
+		Closure onItemActivated
 	}
 
 	@Override
 	Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
-		return new ListItemHolder(builder, value, attributes)
+		return new ListItemHolder(onItemActivated: attributes['onItemActivated'])
 	}
 
 	@Override
-	boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
+	boolean onNodeChildren(FactoryBuilderSupport builder, Object node, Closure childContent)
+	{
+		((ListItemHolder)node).builder = childContent
 		return false
 	}
 
 	@Override
-	boolean onNodeChildren(FactoryBuilderSupport builder, Object node, Closure childContent) {
-		node.builder = childContent
-		return false
-	}
-
-	@Override
-	void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
+	void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node)
+	{
+		ListItemHolder listItem = node
 		((ListView)parent).cellFactory = {
 			return new ListCell() {
 				@Override
@@ -64,22 +43,29 @@ class ListItemFactory implements Factory
 					super.updateItem(item, empty)
 					if ( ! item || empty) return
 					setText(null)
-					node.builder.setDelegate(builder)
-					setGraphic(node.builder(item))
-				}
 
+					if (listItem.onItemActivated)
+						setOnMouseClicked { MouseEvent me ->
+							if (me.clickCount == 2)
+								listItem.onItemActivated(item)
+						}
+					else
+						setOnMouseClicked(null)
+
+					listItem.builder.setDelegate(builder)
+					setGraphic(listItem.builder(item))
+				}
 			}
 		}
 	}
 
 	@Override
-	void setParent(FactoryBuilderSupport builder, Object parent, Object child)
-	{
-
+	boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
+		return false
 	}
 
 	@Override
-	void setChild(FactoryBuilderSupport builder, Object parent, Object child)
-	{
+	boolean isHandlesNodeChildren() {
+		return true
 	}
 }

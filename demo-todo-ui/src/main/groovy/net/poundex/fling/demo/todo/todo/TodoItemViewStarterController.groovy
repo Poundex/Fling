@@ -1,8 +1,8 @@
-package net.poundex.fling.demo.todo.todoem
+package net.poundex.fling.demo.todo.todo
 
 import fling.activity.ActivityNavigator
 import fling.ui.Controller
-import net.poundex.fling.demo.todo.TodoModel
+import javafx.event.ActionEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
@@ -11,19 +11,22 @@ import org.springframework.stereotype.Component
  * Created by poundex on 22/05/17.
  */
 @Component @Scope("group")
-class TodoListController extends Controller<TodoListModel>
+class TodoItemViewStarterController extends Controller<TodoItemViewStarterModel>
 {
 	private final ActivityNavigator activityNavigator
 
 	@Autowired
-	TodoListController(TodoListModel model, ActivityNavigator activityNavigator)
+	TodoItemViewStarterController(TodoItemViewStarterModel model, ActivityNavigator activityNavigator)
 	{
 		super(model)
 		this.activityNavigator = activityNavigator
 	}
 
-	void todoItemActivated(TodoModel item)
+	void onButtonClicked(ActionEvent actionEvent)
 	{
-		activityNavigator.start("TODO", item.id)
+		if( ! model.id || ! model.id.isLong())
+			return
+
+		activityNavigator.start('TODO', model.id.toLong())
 	}
 }

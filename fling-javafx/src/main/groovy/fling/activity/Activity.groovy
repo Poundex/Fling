@@ -10,5 +10,5 @@ interface Activity
 	String getName()
 	String getTitle()
 
-	Group getView()
+	Group start(Object... args)
 }

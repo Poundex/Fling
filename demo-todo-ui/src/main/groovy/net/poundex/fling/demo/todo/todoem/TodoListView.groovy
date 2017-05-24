@@ -25,7 +25,7 @@ class TodoListView extends View<TodoListModel, TodoListController>
 			}
 			center {
 				listView(items: model.todoItems) {
-					listItem { TodoModel item ->
+					listItem(onItemActivated: controller.&todoItemActivated) { TodoModel item ->
 						label(text: item.itemText)
 					}
 				}

@@ -1,6 +1,7 @@
 package net.poundex.fling.fx.ui.activityview
 
 import fling.activity.Activity
+import fling.activity.ActivityResult
 import fling.ui.Model
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -44,7 +45,7 @@ class ActivityViewModel extends Model
 	@PostConstruct
 	void init()
 	{
-		activityService.addActivityStartListener this.&renderActivity
+		activityService.addActivityResultListener this.&onActivityResult
 	}
 
 	void update()
@@ -52,10 +53,10 @@ class ActivityViewModel extends Model
 		activities.addAll activityService.activities.values()
 	}
 
-	void renderActivity(Activity activity)
+	void onActivityResult(ActivityResult activityResult)
 	{
 		FormGroup formCard = groupService.create(FormGroup)
-		formCard.model.cardContent = activity.view
+		formCard.model.cardContent = activityResult.view
 		VBox content = new VBox(25)
 		content.children << formCard.render(sceneGraphBuilderHolder.sceneGraphBuilder)
 		viewContent.set(content)

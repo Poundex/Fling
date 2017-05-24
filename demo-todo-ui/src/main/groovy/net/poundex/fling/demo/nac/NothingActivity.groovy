@@ -15,17 +15,17 @@ class NothingActivity implements Activity
 	final String name = 'NOOP'
 	final String title = 'Do Nothing'
 
-	private final NothingGroup nothingGroup
+	private final GroupService groupService
 
 	@Autowired
 	NothingActivity(GroupService groupService)
 	{
-		this.nothingGroup = groupService.create(NothingGroup)
+		this.groupService = groupService
 	}
 
 	@Override
-	Group getView()
+	Group start(Object... args)
 	{
-		return nothingGroup
+		return groupService.create(NothingGroup)
 	}
 }

@@ -23,11 +23,12 @@ class GroupService
 		this.applicationContext = applicationContext
 	}
 
-	public <T extends Group> T create(Class<T> groupClass)
+	public <T extends Group> T create(Class<T> groupClass, Closure onModelCreated = null)
 	{
 		GroupContextHolder.currentContext = UUID.randomUUID()
 		T result = applicationContext.getBean(groupClass)
 		GroupContextHolder.currentContext = null
+		onModelCreated?.call(result.model)
 		return result
 	}
 }
