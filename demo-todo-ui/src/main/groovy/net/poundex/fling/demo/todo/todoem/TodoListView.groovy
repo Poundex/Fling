@@ -19,16 +19,9 @@ class TodoListView extends View<TodoListModel, TodoListController>
 	}
 
 	Closure viewBuilder = {
-		borderPane {
-			top {
-				label(text: 'Todo List', styleClass: ['card-title'])
-			}
-			center {
-				listView(items: model.todoItems) {
-					listItem(onItemActivated: controller.&todoItemActivated) { TodoModel item ->
-						label(text: item.itemText)
-					}
-				}
+		listView(items: model.todoItems) {
+			listItem(onItemActivated: controller.&todoItemActivated) { TodoModel item ->
+				label(text: item.itemText)
 			}
 		}
 	}

@@ -1,8 +1,9 @@
 package net.poundex.fling.fx.ui.form
 
+import fling.activity.Action
 import fling.ui.Group
 import fling.ui.Model
-import org.springframework.beans.factory.config.BeanDefinition
+import groovyx.javafx.beans.FXBindable
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
@@ -12,5 +13,7 @@ import org.springframework.stereotype.Component
 @Component @Scope("group")
 class FormModel extends Model
 {
+	@FXBindable String title
 	Group cardContent
+	List<Action> actions
 }

@@ -7,5 +7,14 @@ import fling.ui.Group
  */
 class ActivityResult
 {
-	Group view
+	final Group view
+	final Activity activity
+	final List<Action> actions
+
+	ActivityResult(Activity activity, Group view, List<Action> actions = [])
+	{
+		this.view = view
+		this.activity = activity
+		this.actions = actions
+	}
 }

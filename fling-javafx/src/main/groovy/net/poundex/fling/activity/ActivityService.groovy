@@ -27,17 +27,18 @@ class ActivityService implements ActivityNavigator
 		return activities.asImmutable()
 	}
 
+	@Override
 	void start(String activityName, Object... args)
 	{
 		if (activities[activityName])
 			start(activities[activityName], args)
 	}
 
+	@Override
 	void start(Activity activity, Object... args)
 	{
 		activityManager.startActivity(activity, args)
-		ActivityResult activityResult = new ActivityResult()
-		activityResult.view = activity.start(args)
+		ActivityResult activityResult = activity.start(args)
 		activityManager.activityResult(activityResult)
 	}
 

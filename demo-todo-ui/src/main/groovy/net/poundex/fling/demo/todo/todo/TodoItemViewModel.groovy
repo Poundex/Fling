@@ -1,6 +1,6 @@
 package net.poundex.fling.demo.todo.todo
 
-import fling.ui.Model
+import net.poundex.fling.demo.todo.TodoItemFormModel
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoServiceClient
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
  * Created by poundex on 22/05/17.
  */
 @Component @Scope("group")
-class TodoItemViewModel extends Model
+class TodoItemViewModel extends TodoItemFormModel
 {
 	TodoModel todoItem
 

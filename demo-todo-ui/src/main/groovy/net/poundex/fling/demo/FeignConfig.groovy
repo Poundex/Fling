@@ -1,8 +1,8 @@
 package net.poundex.fling.demo
 
 import feign.Feign
-import feign.gson.GsonDecoder
-import feign.gson.GsonEncoder
+import feign.jackson.JacksonDecoder
+import feign.jackson.JacksonEncoder
 import net.poundex.fling.demo.todo.TodoServiceClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -18,8 +18,8 @@ class FeignConfig
 	{
 		return Feign.
 				builder().
-				encoder(new GsonEncoder()).
-				decoder(new GsonDecoder()).
+				encoder(new JacksonEncoder()).
+				decoder(new JacksonDecoder()).
 				target(TodoServiceClient, "http://localhost:8080")
 	}
 }

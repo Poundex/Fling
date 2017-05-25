@@ -1,7 +1,8 @@
 package net.poundex.fling.demo.todo.todoem
 
+import fling.activity.Action
 import fling.activity.Activity
-import fling.ui.Group
+import fling.activity.ActivityResult
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -24,8 +25,12 @@ class TodoList implements Activity
 	}
 
 	@Override
-	Group start(Object... args)
+	ActivityResult start(Object... args)
 	{
-		return groupService.create(TodoListGroup)
+		return new ActivityResult(this, groupService.create(TodoListGroup), [
+		        new Action("Create", {
+			        println "CREATE"
+		        }, true)
+		])
 	}
 }

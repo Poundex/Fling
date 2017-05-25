@@ -5,5 +5,6 @@ package fling.activity
  */
 interface ActivityNavigator
 {
-
+	void start(String activityName, Object... args)
+	void start(Activity activity, Object... args)
 }

@@ -1,4 +1,4 @@
-package net.poundex.fling.demo.todo.todo
+package net.poundex.fling.demo.todo.todo0
 
 import fling.ui.View
 import net.poundex.fling.demo.todo.TodoItemForm
@@ -7,18 +7,18 @@ import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
 /**
- * Created by poundex on 22/05/17.
+ * Created by poundex on 25/05/17.
  */
 @Component @Scope("group")
-class TodoItemViewView extends View<TodoItemViewModel, TodoItemViewController> implements TodoItemForm
+class CreateTodoItemView extends View<CreateTodoItemModel, CreateTodoItemController> implements TodoItemForm
 {
 	@Autowired
-	TodoItemViewView(TodoItemViewModel model, TodoItemViewController controller)
+	CreateTodoItemView(CreateTodoItemModel model, CreateTodoItemController controller)
 	{
 		super(model, controller)
 	}
 
-	Closure viewBuilder = {
+	final Closure viewBuilder = {
 		renderPartial(todoItemForm, delegate)
 	}
 }
