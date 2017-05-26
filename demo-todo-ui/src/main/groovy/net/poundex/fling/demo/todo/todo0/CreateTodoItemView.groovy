@@ -18,7 +18,7 @@ class CreateTodoItemView extends View<CreateTodoItemModel, CreateTodoItemControl
 		super(model, controller)
 	}
 
-	final Closure viewBuilder = {
-		renderPartial(todoItemForm, delegate)
+	final Closure viewBuilder = { Map args ->
+		renderPartial(todoItemForm, delegate, [editable: true])
 	}
 }

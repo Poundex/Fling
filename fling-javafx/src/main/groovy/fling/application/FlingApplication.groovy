@@ -12,9 +12,9 @@ abstract class FlingApplication
 	{
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext()
 		ctx.beanFactory.registerScope(GroupScope.GROUP_SCOPE, new GroupScope())
-//		ctx.beanNameGenerator = new ActivityBeanNameGenerator()
 		ctx.scan(
 				'fling.application',
+				'net.poundex.fling.ctx',
 				'net.poundex.fling.fx',
 				'net.poundex.fling.fx.ui',
 				'net.poundex.fling.fx.cell',

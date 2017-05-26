@@ -1,0 +1,3 @@
+moduleName=fling-closureextension
+moduleVersion=1.0
+extensionClasses=net.poundex.fling.util.ClosureExtension

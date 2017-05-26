@@ -26,6 +26,7 @@ class NothingActivity implements Activity
 	@Override
 	ActivityResult start(Object... args)
 	{
-		return new ActivityResult(this, groupService.create(NothingGroup))
+		return ActivityResult.builder().activity(this).view(groupService.create(NothingGroup)).build()
+
 	}
 }

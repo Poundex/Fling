@@ -38,21 +38,21 @@ class TodoItemView implements Activity
 
 	private ActivityResult getStartResult()
 	{
-		return new ActivityResult(this,
-				groupService.create(TodoItemViewStarterGroup))
+		return ActivityResult.
+				builder().
+				activity(this).
+				view(groupService.create(TodoItemViewStarterGroup)).
+				build()
 	}
 
 	private ActivityResult getViewItemResult(long id)
 	{
-		return new ActivityResult(this,
-				groupService.create(TodoItemViewGroup) { TodoItemViewModel model ->
-					model.todoItemID = id
-				},
-				[
-				        new Action("Edit", {
-					       println "EDIT ${id}"
-				        }, false),
-				]
-		)
+		return ActivityResult.
+				builder().
+				activity(this).
+				action('Edit', { println "EDIT ${id}" }, false).
+				view(groupService.create(TodoItemViewGroup,
+						{ TodoItemViewModel model -> model.todoItemID = id })).
+				build()
 	}
 }

@@ -1,9 +1,9 @@
 package net.poundex.fling.fx.ui.form
 
-import fling.activity.Action
 import fling.ui.Group
 import fling.ui.Model
 import groovyx.javafx.beans.FXBindable
+import net.poundex.fling.activity.PreparedAction
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
@@ -15,5 +15,5 @@ class FormModel extends Model
 {
 	@FXBindable String title
 	Group cardContent
-	List<Action> actions
+	List<PreparedAction> actions
 }

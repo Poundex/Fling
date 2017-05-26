@@ -2,16 +2,11 @@ package net.poundex.fling.fx.ui.activitylist
 
 import fling.activity.Activity
 import fling.ui.View
-import groovyx.javafx.SceneGraphBuilder
 import javafx.beans.value.ChangeListener
 import javafx.collections.ListChangeListener
-import javafx.scene.control.ListView
-import javafx.scene.control.TextField
-import javafx.scene.control.TitledPane
 import javafx.scene.control.TreeCell
 import javafx.scene.control.TreeItem
 import javafx.scene.control.TreeView
-import javafx.scene.layout.BorderPane
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -38,10 +33,11 @@ class ActivityListView extends View<ActivityListModel, ActivityListController>
 		model.activities.addListener ({ ListChangeListener.Change<Activity> c ->
 			while(c.next()) c.addedSubList.each { root.children << new TreeItem(it) }
 		} as ListChangeListener<Activity>)
-		model.update()
+
 	}
 
 	final Closure viewBuilder = {
+		model.update()
 		vbox(styleClass: ['sidebar'], padding: 15, spacing: 10) {
 			textField()
 			mainListView = treeView(

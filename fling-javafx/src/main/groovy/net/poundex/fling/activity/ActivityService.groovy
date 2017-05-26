@@ -3,6 +3,7 @@ package net.poundex.fling.activity
 import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
+import fling.activity.Information
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -12,13 +13,12 @@ import org.springframework.stereotype.Service
 @Service
 class ActivityService implements ActivityNavigator
 {
-	private final Map<String, Activity> activities
+	private final Map<String, Activity> activities = new TreeMap<>({ l, r -> l <=> r })
 	private final ActivityManager activityManager
 
 	@Autowired
-	ActivityService(Map<String, Activity> activities, ActivityManager activityManager)
+	ActivityService(ActivityManager activityManager)
 	{
-		this.activities = new LinkedHashMap<>(activities.collectEntries { k, v -> [v.name, v] }.sort())
 		this.activityManager = activityManager
 	}
 
@@ -42,6 +42,16 @@ class ActivityService implements ActivityNavigator
 		activityManager.activityResult(activityResult)
 	}
 
+	@Override
+	ActivityResult redirect(String activityName, List<Information> information, Object... args)
+	{
+		activityManager.startActivity(activities[activityName], args)
+		ActivityResult activityResult = activities[activityName].start(args)
+		activityResult.information.addAll(information)
+		activityManager.activityResult(activityResult)
+		return activityResult
+	}
+
 	void addActivityStartListener(Closure listener)
 	{
 		activityManager.addActivityStartListener(listener)
@@ -49,6 +59,11 @@ class ActivityService implements ActivityNavigator
 
 	void addActivityResultListener(Closure listener) {
 		activityManager.addActivityResultListener(listener)
+	}
+
+	void register(Activity activity)
+	{
+		activities[activity.name] = activity
 	}
 
 }

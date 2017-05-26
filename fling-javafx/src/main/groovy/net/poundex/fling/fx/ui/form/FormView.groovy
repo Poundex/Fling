@@ -36,7 +36,7 @@ class FormView extends View<FormModel, FormController>
 						button(text: it.name,
 								styleClass: ['button-raised'],
 								defaultButton: it.primary,
-								onAction: it.action)
+								onAction: it)
 					}
 				}
 			}

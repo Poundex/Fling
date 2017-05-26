@@ -9,6 +9,7 @@ import javafx.collections.FXCollections
 import javafx.scene.Node
 import javafx.scene.layout.VBox
 import net.poundex.fling.activity.ActivityService
+import net.poundex.fling.activity.PreparedAction
 import net.poundex.fling.fx.ui.form.FormModel
 import net.poundex.fling.group.GroupService
 import net.poundex.fling.fx.SceneGraphBuilderHolder
@@ -57,7 +58,9 @@ class ActivityViewModel extends Model
 	void onActivityResult(ActivityResult activityResult)
 	{
 		FormGroup formCard = groupService.create(FormGroup) { FormModel model ->
-			model.actions = activityResult.actions
+			model.actions = activityResult.actions.collect {
+				new PreparedAction(it, activityResult)
+			}
 			model.title = activityResult.activity.title
 		}
 		formCard.model.cardContent = activityResult.view

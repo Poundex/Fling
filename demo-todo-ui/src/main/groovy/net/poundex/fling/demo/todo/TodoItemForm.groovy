@@ -9,10 +9,11 @@ trait TodoItemForm
 {
 	abstract Model getModel()
 
-	Closure todoItemForm = {
+	Closure todoItemForm = { Map args ->
+		boolean editable = args?.editable ?: false
 		vbox {
 			label(text: 'Todo Task', styleClass: ['control-label'])
-			label(text: bind(model.todoItem.itemTextProperty()))
+			textField(text: bind(model.todoItem.itemTextProperty()), editable: editable)
 		}
 	}
 }

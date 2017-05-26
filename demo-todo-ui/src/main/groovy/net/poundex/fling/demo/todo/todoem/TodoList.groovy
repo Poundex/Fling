@@ -1,6 +1,5 @@
 package net.poundex.fling.demo.todo.todoem
 
-import fling.activity.Action
 import fling.activity.Activity
 import fling.activity.ActivityResult
 import net.poundex.fling.group.GroupService
@@ -27,10 +26,16 @@ class TodoList implements Activity
 	@Override
 	ActivityResult start(Object... args)
 	{
-		return new ActivityResult(this, groupService.create(TodoListGroup), [
-		        new Action("Create", {
-			        println "CREATE"
-		        }, true)
-		])
+		return ActivityResult.
+				builder().
+				activity(this).
+				view(groupService.create(TodoListGroup)).
+				action('Create', this.&create, true).
+				build()
+	}
+
+	private ActivityResult create(ActivityResult activityResult)
+	{
+		println "CREATE"
 	}
 }
