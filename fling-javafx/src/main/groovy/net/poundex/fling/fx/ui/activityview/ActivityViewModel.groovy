@@ -2,6 +2,7 @@ package net.poundex.fling.fx.ui.activityview
 
 import fling.activity.Activity
 import fling.activity.ActivityResult
+import fling.activity.Information
 import fling.ui.Model
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -11,6 +12,8 @@ import javafx.scene.layout.VBox
 import net.poundex.fling.activity.ActivityService
 import net.poundex.fling.activity.PreparedAction
 import net.poundex.fling.fx.ui.form.FormModel
+import net.poundex.fling.fx.ui.information.InformationGroup
+import net.poundex.fling.fx.ui.information.InformationModel
 import net.poundex.fling.group.GroupService
 import net.poundex.fling.fx.SceneGraphBuilderHolder
 import net.poundex.fling.fx.ui.form.FormGroup
@@ -65,8 +68,15 @@ class ActivityViewModel extends Model
 		}
 		formCard.model.cardContent = activityResult.view
 		VBox content = new VBox(25)
+		activityResult.information.each { Information information ->
+			InformationGroup group = groupService.create(InformationGroup, { InformationModel model ->
+				model.information = information
+			})
+			Node panel = group.render(sceneGraphBuilderHolder.sceneGraphBuilder)
+			group.model.remover = { content.children.remove(panel) }
+			content.children << panel
+		}
 		content.children << formCard.render(sceneGraphBuilderHolder.sceneGraphBuilder)
 		viewContent.set(content)
 	}
-
 }

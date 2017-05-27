@@ -1,6 +1,7 @@
 package fling.application
 
 import groovyx.javafx.GroovyFX
+import net.poundex.fling.fx.IconBeanFactory
 import net.poundex.fling.fx.SceneGraphBuilderHolder
 import net.poundex.fling.fx.cell.ListItemFactory
 import net.poundex.fling.fx.ui.main.MainGroup
@@ -34,6 +35,8 @@ class ApplicationWindow
 			GroovyFX.start {
 				sceneGraphBuilderHolder.sceneGraphBuilder = delegate
 				registerFactory "listItem", listItemFactory
+				registerFactory "listItem", listItemFactory
+				registerBeanFactory "icon", IconBeanFactory
 
 				stage(title: 'Activity Runner', show: true, centerOnScreen: true) {
 					mainGroup.render(delegate)

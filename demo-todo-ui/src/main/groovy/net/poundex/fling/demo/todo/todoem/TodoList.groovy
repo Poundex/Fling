@@ -1,6 +1,7 @@
 package net.poundex.fling.demo.todo.todoem
 
 import fling.activity.Activity
+import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,11 +17,13 @@ class TodoList implements Activity
 	final String title = "Todo List"
 
 	private final GroupService groupService
+	private final ActivityNavigator activityNavigator
 
 	@Autowired
-	TodoList(GroupService groupService)
+	TodoList(GroupService groupService, ActivityNavigator activityNavigator)
 	{
 		this.groupService = groupService
+		this.activityNavigator = activityNavigator
 	}
 
 	@Override
@@ -36,6 +39,6 @@ class TodoList implements Activity
 
 	private ActivityResult create(ActivityResult activityResult)
 	{
-		println "CREATE"
+		return activityNavigator.redirect("TODO0", [])
 	}
 }

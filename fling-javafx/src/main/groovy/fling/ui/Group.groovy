@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
  */
 abstract class Group<C extends Controller, V extends View, M extends Model>
 {
+	final UUID id
+
 	final C controller
 	final V view
 	final M model
@@ -15,6 +17,8 @@ abstract class Group<C extends Controller, V extends View, M extends Model>
 	@Autowired
 	Group(C controller, V view, M model)
 	{
+		this.id = UUID.randomUUID()
+
 		this.controller = controller
 		this.view = view
 		this.model = model

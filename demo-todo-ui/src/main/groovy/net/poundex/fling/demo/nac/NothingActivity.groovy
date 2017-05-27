@@ -2,6 +2,7 @@ package net.poundex.fling.demo.nac
 
 import fling.activity.Activity
 import fling.activity.ActivityResult
+import fling.activity.Information
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -26,7 +27,14 @@ class NothingActivity implements Activity
 	@Override
 	ActivityResult start(Object... args)
 	{
-		return ActivityResult.builder().activity(this).view(groupService.create(NothingGroup)).build()
+		return ActivityResult.
+				builder().
+				activity(this).
+				view(groupService.create(NothingGroup)).
+				information(new Information(
+						Information.Type.INFO,
+						"Hi!")).
+				build()
 
 	}
 }

@@ -28,6 +28,8 @@ class GroupService
 		GroupContextHolder.currentContext = UUID.randomUUID()
 		T result = applicationContext.getBean(groupClass)
 		GroupContextHolder.currentContext = null
+		if(result.model.respondsTo("setGroupID"))
+			result.model.groupID = result.id
 		onModelCreated?.call(result.model)
 		return result
 	}
