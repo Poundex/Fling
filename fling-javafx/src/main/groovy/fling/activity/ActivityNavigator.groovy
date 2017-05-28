@@ -12,4 +12,6 @@ interface ActivityNavigator
 	ActivityResult redirect(String activityName, List<Information> information, Map<String, ?> args)
 
 	void refresh(ActivityResult activityResult)
+
+	ActivityResult run(String activityName, Map<String, ?> args)
 }

@@ -2,8 +2,6 @@ package net.poundex.fling.demo.todo.todo
 
 import net.poundex.fling.demo.todo.TodoItemFormModel
 import net.poundex.fling.demo.todo.TodoModel
-import net.poundex.fling.demo.todo.TodoServiceClient
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
@@ -14,17 +12,4 @@ import org.springframework.stereotype.Component
 class TodoItemViewModel extends TodoItemFormModel
 {
 	TodoModel todoItem
-
-	private final TodoServiceClient todoServiceClient
-
-	@Autowired
-	TodoItemViewModel(TodoServiceClient todoServiceClient)
-	{
-		this.todoServiceClient = todoServiceClient
-	}
-
-	void setTodoItemID(long id)
-	{
-		todoItem = todoServiceClient.get(id)
-	}
 }

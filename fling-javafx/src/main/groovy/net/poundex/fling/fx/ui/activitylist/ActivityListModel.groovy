@@ -33,6 +33,6 @@ class ActivityListModel extends Model
 
 	void update()
 	{
-		activities.addAll activityService.activities.values()
+		activities.addAll activityService.activities.values().findAll { ! it.name.startsWith('!!') }
 	}
 }

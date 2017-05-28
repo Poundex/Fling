@@ -58,6 +58,12 @@ class ActivityService implements ActivityNavigator
 		activityManager.activityResult(activityResult)
 	}
 
+	@Override
+	ActivityResult run(String activityName, Map<String, ?> args)
+	{
+		activities[activityName].start(args)
+	}
+
 	void addActivityStartListener(Closure listener)
 	{
 		activityManager.addActivityStartListener(listener)

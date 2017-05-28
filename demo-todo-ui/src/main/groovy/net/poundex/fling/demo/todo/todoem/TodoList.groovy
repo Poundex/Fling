@@ -3,6 +3,7 @@ package net.poundex.fling.demo.todo.todoem
 import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
+import net.poundex.fling.demo.todo.TodoServiceClient
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -18,12 +19,14 @@ class TodoList implements Activity
 
 	private final GroupService groupService
 	private final ActivityNavigator activityNavigator
+	private final TodoServiceClient todoServiceClient
 
 	@Autowired
-	TodoList(GroupService groupService, ActivityNavigator activityNavigator)
+	TodoList(GroupService groupService, ActivityNavigator activityNavigator, TodoServiceClient todoServiceClient)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
+		this.todoServiceClient = todoServiceClient
 	}
 
 	@Override
@@ -32,7 +35,9 @@ class TodoList implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(TodoListGroup)).
+				view(groupService.create(TodoListGroup, { TodoListModel model ->
+					model.todoItems.addAll(todoServiceClient.index())
+				})).
 				action('Create', this.&create, true).
 				build()
 	}
