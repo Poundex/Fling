@@ -18,13 +18,13 @@ class TodoItemView implements Activity
 	final String title = "Todo Item"
 
 	private final GroupService groupService
-//	private final ActivityNavigator activityNavigator
+	private final ActivityNavigator activityNavigator
 
 	@Autowired
-	TodoItemView(GroupService groupService)//, ActivityNavigator activityNavigator)
+	TodoItemView(GroupService groupService, ActivityNavigator activityNavigator)
 	{
 		this.groupService = groupService
-//		this.activityNavigator = activityNavigator
+		this.activityNavigator = activityNavigator
 	}
 
 	@Override
@@ -50,7 +50,7 @@ class TodoItemView implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				action('Edit', { println "EDIT ${id}" }, false).
+				action('Edit', { activityNavigator.start("TODO1", id) }, false).
 				view(groupService.create(TodoItemViewGroup,
 						{ TodoItemViewModel model -> model.todoItemID = id })).
 				build()

@@ -9,4 +9,6 @@ interface ActivityNavigator
 	void start(Activity activity, Object... args)
 
 	ActivityResult redirect(String activityName, List<Information> information, Object... args)
+
+	void refresh(ActivityResult activityResult)
 }

@@ -1,5 +1,6 @@
 package fling.activity
 
+import com.sun.org.apache.bcel.internal.generic.ARETURN
 import fling.ui.Group
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.SimpleType
@@ -62,5 +63,20 @@ class ActivityResult
 	static ActivityResultBuilder builder()
 	{
 		return new ActivityResultBuilder()
+	}
+
+	static ActivityResultBuilder builder(ActivityResult activityResult)
+	{
+		return new ActivityResultBuilder().with {
+			activity(activityResult.activity)
+			activityResult.information.each {
+				information(it)
+			}
+			view(activityResult.view)
+			activityResult.actions.each {
+				action(it.name, it.action, it.primary)
+			}
+			it
+		}
 	}
 }

@@ -12,6 +12,11 @@ trait TodoItemForm
 	Closure todoItemForm = { Map args ->
 		boolean editable = args?.editable ?: false
 		vbox {
+			if(model.todoItem.id)
+			{
+				label(text: 'id' ,styleClass: ['control-label'])
+				textField(text: model.todoItem.id, editable: false)
+			}
 			label(text: 'Todo Task', styleClass: ['control-label'])
 			textField(text: bind(model.todoItem.itemTextProperty()), editable: editable)
 		}

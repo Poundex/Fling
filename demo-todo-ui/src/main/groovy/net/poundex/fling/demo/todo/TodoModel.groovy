@@ -7,6 +7,6 @@ import groovyx.javafx.beans.FXBindable
  */
 class TodoModel
 {
-	long id
+	Long id
 	@FXBindable String itemText
 }

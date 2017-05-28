@@ -5,6 +5,7 @@ import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import fling.activity.Information
+import net.poundex.fling.demo.FeignConfig
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoServiceClient
 import net.poundex.fling.group.GroupService
@@ -44,16 +45,15 @@ class CreateTodoItem implements Activity
 
 	private ActivityResult commit(ActivityResult previous)
 	{
-		try
-		{
+		try {
 			TodoModel item = todoServiceClient.save(previous.view.model.todoItem)
 			activityNavigator.redirect("TODO", [new Information(
-					Information.Type.SUCCESS, "Cre-ated Todo Item with id ${item.id}")], item.id)
-		} catch (FeignException fex)
-		{
-			if (fex.status() == 422)
-//				return new ActivityResult(this, createTodoItemGroup)
-				null
+					Information.Type.SUCCESS, "Created Todo Item with id ${item.id}")], item.id)
+		} catch (FeignConfig.ValidationException vex) {
+			activityNavigator.refresh ActivityResult.builder(previous).with {
+				vex.errors.each { err -> information(new Information(Information.Type.ERROR, err.message)) }
+				it
+			}.build()
 		}
 	}
 }

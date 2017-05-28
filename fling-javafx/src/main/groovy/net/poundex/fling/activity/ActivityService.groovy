@@ -52,6 +52,12 @@ class ActivityService implements ActivityNavigator
 		return activityResult
 	}
 
+	@Override
+	void refresh(ActivityResult activityResult)
+	{
+		activityManager.activityResult(activityResult)
+	}
+
 	void addActivityStartListener(Closure listener)
 	{
 		activityManager.addActivityStartListener(listener)
