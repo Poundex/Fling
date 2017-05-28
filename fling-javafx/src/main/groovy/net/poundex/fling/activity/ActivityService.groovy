@@ -28,14 +28,14 @@ class ActivityService implements ActivityNavigator
 	}
 
 	@Override
-	void start(String activityName, Object... args)
+	void start(String activityName, Map<String, ?> args)
 	{
 		if (activities[activityName])
 			start(activities[activityName], args)
 	}
 
 	@Override
-	void start(Activity activity, Object... args)
+	void start(Activity activity, Map<String, ?> args = [:])
 	{
 		activityManager.startActivity(activity, args)
 		ActivityResult activityResult = activity.start(args)
@@ -43,7 +43,7 @@ class ActivityService implements ActivityNavigator
 	}
 
 	@Override
-	ActivityResult redirect(String activityName, List<Information> information, Object... args)
+	ActivityResult redirect(String activityName, List<Information> information, Map<String, ?> args)
 	{
 		activityManager.startActivity(activities[activityName], args)
 		ActivityResult activityResult = activities[activityName].start(args)

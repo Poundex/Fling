@@ -24,6 +24,6 @@ class TodoListController extends Controller<TodoListModel>
 
 	void todoItemActivated(TodoModel item)
 	{
-		activityNavigator.start("TODO", item.id)
+		activityNavigator.start("TODO", [id: item.id])
 	}
 }

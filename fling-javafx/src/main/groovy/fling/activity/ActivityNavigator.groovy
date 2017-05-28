@@ -5,10 +5,11 @@ package fling.activity
  */
 interface ActivityNavigator
 {
-	void start(String activityName, Object... args)
-	void start(Activity activity, Object... args)
+	void start(String activityName, Map<String, ?> args)
+	void start(Activity activity)
+	void start(Activity activity, Map<String, ?> args)
 
-	ActivityResult redirect(String activityName, List<Information> information, Object... args)
+	ActivityResult redirect(String activityName, List<Information> information, Map<String, ?> args)
 
 	void refresh(ActivityResult activityResult)
 }

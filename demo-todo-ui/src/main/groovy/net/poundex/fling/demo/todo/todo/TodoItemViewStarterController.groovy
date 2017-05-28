@@ -27,6 +27,6 @@ class TodoItemViewStarterController extends Controller<TodoItemViewStarterModel>
 		if( ! model.id || ! model.id.isLong())
 			return
 
-		activityNavigator.start('TODO', model.id.toLong())
+		activityNavigator.start('TODO', [id: model.id.toLong()])
 	}
 }

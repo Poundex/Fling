@@ -1,5 +1,6 @@
 package net.poundex.fling.fx.ui.activitylist
 
+import fling.activity.ActivityNavigator
 import fling.ui.Controller
 import javafx.scene.input.MouseEvent
 import net.poundex.fling.activity.ActivityService
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component
 @Component
 class ActivityListController extends Controller<ActivityListModel>
 {
-	private final ActivityService activityService
+	private final ActivityNavigator activityService
 
 	@Autowired
 	ActivityListController(ActivityListModel model, ActivityService activityService)

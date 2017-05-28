@@ -1,6 +1,5 @@
 package net.poundex.fling.demo.todo.todo0
 
-import feign.FeignException
 import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
@@ -34,7 +33,7 @@ class CreateTodoItem implements Activity
 	}
 
 	@Override
-	ActivityResult start(Object... args)
+	ActivityResult start(Map<String, ?> args)
 	{
 		return ActivityResult.
 				builder().
@@ -48,7 +47,7 @@ class CreateTodoItem implements Activity
 		try {
 			TodoModel item = todoServiceClient.save(previous.view.model.todoItem)
 			activityNavigator.redirect("TODO", [new Information(
-					Information.Type.SUCCESS, "Created Todo Item with id ${item.id}")], item.id)
+					Information.Type.SUCCESS, "Created Todo Item with id ${item.id}")], [id: item.id])
 		} catch (FeignConfig.ValidationException vex) {
 			activityNavigator.refresh ActivityResult.builder(previous).with {
 				vex.errors.each { err -> information(new Information(Information.Type.ERROR, err.message)) }

@@ -17,11 +17,11 @@ class ActivityManager
 	private List<Closure> activityStartListeners = []
 	private List<Closure> activityResultListeners = []
 
-	void startActivity(Activity activity, Object... args)
+	void startActivity(Activity activity, Map args)
 	{
 		activityStartListeners.each {
 			if (it.maximumNumberOfParameters > 1)
-				it(activity, *args)
+				it(activity, args)
 			else
 				it(activity)
 		}

@@ -7,5 +7,5 @@ interface Activity
 	String getName()
 	String getTitle()
 
-	ActivityResult start(Object... args)
+	ActivityResult start(Map<String, ?> args)
 }

@@ -25,7 +25,7 @@ class NothingActivity implements Activity
 	}
 
 	@Override
-	ActivityResult start(Object... args)
+	ActivityResult start(Map<String, ?> args)
 	{
 		return ActivityResult.
 				builder().

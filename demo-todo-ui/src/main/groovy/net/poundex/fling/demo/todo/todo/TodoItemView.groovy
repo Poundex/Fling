@@ -1,6 +1,5 @@
 package net.poundex.fling.demo.todo.todo
 
-import fling.activity.Action
 import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
@@ -28,12 +27,12 @@ class TodoItemView implements Activity
 	}
 
 	@Override
-	ActivityResult start(Object... args)
+	ActivityResult start(Map<String, ?> args)
 	{
-		if (args.size() < 1 || ! args[0] instanceof Long)
+		if ( ! args['id'])
 			return startResult
 		else
-			return getViewItemResult(args[0])
+			return getViewItemResult(args['id'].toLong())
 	}
 
 	private ActivityResult getStartResult()
@@ -50,7 +49,7 @@ class TodoItemView implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				action('Edit', { activityNavigator.start("TODO1", id) }, false).
+				action('Edit', { activityNavigator.start("TODO1", [id: id]) }, false).
 				view(groupService.create(TodoItemViewGroup,
 						{ TodoItemViewModel model -> model.todoItemID = id })).
 				build()

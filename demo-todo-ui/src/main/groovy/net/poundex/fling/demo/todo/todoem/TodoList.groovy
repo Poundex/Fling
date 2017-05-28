@@ -27,7 +27,7 @@ class TodoList implements Activity
 	}
 
 	@Override
-	ActivityResult start(Object... args)
+	ActivityResult start(Map<String, ?> args)
 	{
 		return ActivityResult.
 				builder().
@@ -39,6 +39,6 @@ class TodoList implements Activity
 
 	private ActivityResult create(ActivityResult activityResult)
 	{
-		return activityNavigator.redirect("TODO0", [])
+		return activityNavigator.redirect("TODO0", [], [:])
 	}
 }
