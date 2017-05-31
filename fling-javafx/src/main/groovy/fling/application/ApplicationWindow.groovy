@@ -6,6 +6,9 @@ import net.poundex.fling.fx.SceneGraphBuilderHolder
 import net.poundex.fling.fx.cell.ListItemFactory
 import net.poundex.fling.fx.ui.main.MainGroup
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationListener
+import org.springframework.context.event.ContextRefreshedEvent
+import org.springframework.context.event.SmartApplicationListener
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
@@ -14,7 +17,7 @@ import javax.annotation.PostConstruct
  * Created by poundex on 19/05/17.
  */
 @Component
-class ApplicationWindow
+class ApplicationWindow implements ApplicationListener<ContextRefreshedEvent>
 {
 	private final MainGroup mainGroup
 	private final SceneGraphBuilderHolder sceneGraphBuilderHolder
@@ -28,7 +31,7 @@ class ApplicationWindow
 		this.listItemFactory = listItemFactory
 	}
 
-	@PostConstruct
+//	@PostConstruct
 	void init()
 	{
 		Thread.start {
@@ -43,5 +46,10 @@ class ApplicationWindow
 				}
 			}
 		}
+	}
+
+	@Override
+	void onApplicationEvent(ContextRefreshedEvent event) {
+		init()
 	}
 }
