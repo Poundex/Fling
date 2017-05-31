@@ -2,6 +2,7 @@ package net.poundex.fling.fx.ui.activitylist
 
 import fling.activity.ActivityNavigator
 import fling.ui.Controller
+import javafx.event.ActionEvent
 import javafx.scene.input.MouseEvent
 import net.poundex.fling.activity.ActivityService
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,5 +29,11 @@ class ActivityListController extends Controller<ActivityListModel>
 			return
 
 		activityService.start(model.selectedActivity)
+	}
+
+	void onNameFieldAction(ActionEvent e)
+	{
+		activityService.start(model.nameField.toUpperCase(), [:])
+		model.nameField = ""
 	}
 }

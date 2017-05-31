@@ -2,6 +2,7 @@ package net.poundex.fling.fx.ui.activitylist
 
 import fling.activity.Activity
 import fling.ui.Model
+import groovyx.javafx.beans.FXBindable
 import javafx.collections.FXCollections
 import net.poundex.fling.activity.ActivityService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +20,7 @@ class ActivityListModel extends Model
 
 	final javafx.collections.ObservableList<Activity> activities = FXCollections.observableArrayList()
 	Activity selectedActivity
+	@FXBindable String nameField = ""
 
 	@Autowired
 	ActivityListModel(ActivityService activityService)

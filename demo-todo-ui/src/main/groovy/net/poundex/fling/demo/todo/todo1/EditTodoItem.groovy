@@ -8,6 +8,7 @@ import fling.activity.Information
 import net.poundex.fling.demo.FeignConfig
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -61,7 +62,7 @@ class EditTodoItem implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				action('Save', this.&commit, true).
+				action('Save', this.&commit, ActionType.PRIMARY).
 				view(groupService.create(EditTodoItemGroup,
 						{ EditTodoItemModel model -> model.todoItem = todoModel })).
 				build()

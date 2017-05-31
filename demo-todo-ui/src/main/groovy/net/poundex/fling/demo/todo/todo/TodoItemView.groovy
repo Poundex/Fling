@@ -60,8 +60,8 @@ class TodoItemView implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				action('Edit', { activityNavigator.start("TODO1", [id: id]) }, false).
-				action('Delete', { activityNavigator.start("TODO2", [id: id]) }, false).
+				action('Edit', { activityNavigator.start("TODO1", [id: id]) }).
+				action('Delete', { activityNavigator.start("TODO2", [id: id]) }).
 				view(groupService.create(TodoItemViewGroup,
 						{ TodoItemViewModel model -> model.todoItem = todoModel })).
 				build()

@@ -39,7 +39,7 @@ class ActivityListView extends View<ActivityListModel, ActivityListController>
 	final Closure viewBuilder = {
 		model.update()
 		vbox(styleClass: ['sidebar'], padding: 15, spacing: 10) {
-			textField()
+			textField(text: bind(model.nameFieldProperty()), onAction: controller.&onNameFieldAction)
 			mainListView = treeView(
 					styleClass: ['activityTree'],
 					cellFactory: this.&activityListCell,

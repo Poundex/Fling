@@ -5,6 +5,7 @@ import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -60,8 +61,8 @@ class DeleteTodoItem implements Activity
 				})).
 				action("Cancel", { activityNavigator.redirect('TODO', [
 				        new Information(Information.Type.INFO, "Delete cancelled")
-				], [id: id])}, false).
-				action("Delete", { activityNavigator.redirect('TODO2', [],  [id: id, confirm: true]) }, true).
+				], [id: id])}).
+				action("Delete", { activityNavigator.redirect('TODO2', [],  [id: id, confirm: true]) }, ActionType.DANGER).
 				build()
 	}
 

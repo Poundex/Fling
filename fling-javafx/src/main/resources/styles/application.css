@@ -20,26 +20,35 @@
 	-fx-spacing: 4;
 }
 .info-info {
-	-fx-text-base-color: #00c;
+	-fx-text-base-color: #2196F3;
 	-fx-text-fill: -fx-text-base-color;
 	-fx-fill: -fx-text-base-color;
 }
 
 
 .info-success {
-	-fx-text-base-color: #0C0;
+	-fx-text-base-color: #4CAF50;
 	-fx-fill: -fx-text-base-color;
 	-fx-text-fill: -fx-text-base-color;
 }
 
 .info-warning {
-	-fx-text-base-color: #ffc800;
+	-fx-text-base-color: #FFC107;
 	-fx-fill: -fx-text-base-color;
 	-fx-text-fill: -fx-text-base-color;
 }
 
 .info-error {
-	-fx-text-base-color: #C00;
+	-fx-text-base-color: #F44336;
 	-fx-fill: -fx-text-base-color;
 	-fx-text-fill: -fx-text-base-color;
+}
+.button-raised.danger {
+	-fx-background-color: #F44336;
+	-fx-text-fill: -fx-text-button-colored;
+}
+
+.button.danger:armed {
+	-fx-background-color: -swatch-grey;
+	-fx-text-fill: -fx-text-button-colored;
 }

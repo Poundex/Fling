@@ -3,6 +3,7 @@ package net.poundex.fling.fx.ui.form
 import fling.ui.View
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import net.poundex.fling.fx.ActionType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Scope
@@ -29,14 +30,24 @@ class FormView extends View<FormModel, FormController>
 				model.cardContent.render(delegate)
 			}
 			bottom {
-				hbox(alignment: Pos.BOTTOM_RIGHT,
-						padding: new Insets(20, 0, 0, 0),
-						spacing: 10) {
-					model.actions.each {
-						button(text: it.name,
-								styleClass: ['button-raised'],
-								defaultButton: it.primary,
-								onAction: it)
+				borderPane {
+					right {
+						hbox(alignment: Pos.BOTTOM_RIGHT,
+								padding: new Insets(20, 0, 0, 0),
+								spacing: 10) {
+							model.actions.findAll { it.actionType != ActionType.AUX }.each {
+								it.actionType.styleButton(button(text: it.name, onAction: it))
+							}
+						}
+					}
+					left {
+						hbox(alignment: Pos.BOTTOM_LEFT,
+								padding: new Insets(20, 0, 0, 0),
+								spacing: 10) {
+							model.actions.findAll { it.actionType == ActionType.AUX }.each {
+								it.actionType.styleButton(button(text: it.name, onAction: it))
+							}
+						}
 					}
 				}
 			}

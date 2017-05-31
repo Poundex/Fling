@@ -4,6 +4,7 @@ import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import javafx.beans.property.SimpleStringProperty
+import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -45,7 +46,7 @@ class ParamEntry implements Activity
 					activityNavigator.start(activityName, self.view.model.params.keySet().collectEntries {
 						[it, self.view.model.paramValues[it].get()]
 					})
-				}, true).
+				}, ActionType.PRIMARY).
 				build()
 	}
 

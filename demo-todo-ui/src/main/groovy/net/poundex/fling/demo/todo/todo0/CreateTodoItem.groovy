@@ -7,6 +7,7 @@ import fling.activity.Information
 import net.poundex.fling.demo.FeignConfig
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -39,7 +40,7 @@ class CreateTodoItem implements Activity
 				builder().
 				activity(this).
 				view(groupService.create(CreateTodoItemGroup)).
-				action('Save', this.&commit, true).build()
+				action('Save', this.&commit, ActionType.PRIMARY).build()
 	}
 
 	private ActivityResult commit(ActivityResult previous)

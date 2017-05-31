@@ -1,9 +1,9 @@
 package fling.activity
 
-import com.sun.org.apache.bcel.internal.generic.ARETURN
 import fling.ui.Group
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.SimpleType
+import net.poundex.fling.fx.ActionType
 
 /**
  * Created by poundex on 24/05/17.
@@ -42,9 +42,12 @@ class ActivityResult
 			return this
 		}
 
-		ActivityResultBuilder action(String name, @ClosureParams(value = SimpleType, options = 'fling.activity.ActivityResult') Closure<ActivityResult> action, boolean primary = false)
+		ActivityResultBuilder action(String name,
+		                             @ClosureParams(value = SimpleType, options = 'fling.activity.ActivityResult')
+				                             Closure<ActivityResult> action,
+		                             ActionType actionType = ActionType.NORMAL)
 		{
-			actions << new Action(name, action, primary)
+			actions << new Action(name, action, actionType)
 			return this
 		}
 
@@ -74,7 +77,7 @@ class ActivityResult
 			}
 			view(activityResult.view)
 			activityResult.actions.each {
-				action(it.name, it.action, it.primary)
+				action(it.name, it.action, it.actionType)
 			}
 			it
 		}

@@ -4,6 +4,7 @@ import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -38,7 +39,7 @@ class TodoList implements Activity
 				view(groupService.create(TodoListGroup, { TodoListModel model ->
 					model.todoItems.addAll(todoServiceClient.index())
 				})).
-				action('Create', this.&create, true).
+				action('Create', this.&create, ActionType.PRIMARY).
 				build()
 	}
 

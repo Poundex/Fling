@@ -1,6 +1,7 @@
 package fling.activity
 
 import groovy.transform.Immutable
+import net.poundex.fling.fx.ActionType
 
 /**
  * Created by poundex on 25/05/17.
@@ -10,5 +11,5 @@ class Action
 {
 	String name
 	Closure action
-	boolean primary = false
+	ActionType actionType = ActionType.NORMAL
 }
