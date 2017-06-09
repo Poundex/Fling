@@ -18,26 +18,28 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class FeignConfig
 {
+	private static String BASE_URL = "http://localhost:8080"
+
 	@Bean
 	TodoServiceClient todoServiceClient(ErrorDecoder springErrorDecoder)
 	{
-		return Feign.
-				builder().
-				errorDecoder(springErrorDecoder).
-				encoder(new JacksonEncoder()).
-				decoder(new JacksonDecoder()).
-				target(TodoServiceClient, "http://localhost:8080")
+		return feignClientFor(TodoServiceClient, springErrorDecoder)
 	}
 
 	@Bean
 	CategoryServiceClient categoryServiceClient(ErrorDecoder springErrorDecoder)
 	{
+		return feignClientFor(CategoryServiceClient, springErrorDecoder)
+	}
+
+	private static <T> T feignClientFor(Class<T> klass, ErrorDecoder springErrorDecoder)
+	{
 		return Feign.
 				builder().
 				errorDecoder(springErrorDecoder).
 				encoder(new JacksonEncoder()).
 				decoder(new JacksonDecoder()).
-				target(CategoryServiceClient, "http://localhost:8080")
+				target(klass, BASE_URL)
 	}
 
 	@Bean
