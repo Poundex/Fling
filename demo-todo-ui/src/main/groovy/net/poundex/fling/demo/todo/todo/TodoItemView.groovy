@@ -6,7 +6,7 @@ import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.todo.TodoModel
-import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -22,14 +22,14 @@ class TodoItemView implements Activity
 
 	private final GroupService groupService
 	private final ActivityNavigator activityNavigator
-	private final TodoServiceClient todoServiceClient
+	private final TodoService todoService
 
 	@Autowired
-	TodoItemView(GroupService groupService, ActivityNavigator activityNavigator, TodoServiceClient todoServiceClient)
+	TodoItemView(GroupService groupService, ActivityNavigator activityNavigator, TodoService todoService)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
-		this.todoServiceClient = todoServiceClient
+		this.todoService = todoService
 	}
 
 	@Override
@@ -50,7 +50,7 @@ class TodoItemView implements Activity
 	{
 		TodoModel todoModel
 		try {
-			 todoModel = todoServiceClient.get(id)
+			 todoModel = todoService.get(id)
 		} catch (FeignException fex) {
 			if(fex.status() == 404)
 				return getStartResult([

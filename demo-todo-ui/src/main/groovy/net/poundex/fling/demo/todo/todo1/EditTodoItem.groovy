@@ -7,7 +7,7 @@ import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.FeignConfig
 import net.poundex.fling.demo.todo.TodoModel
-import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,14 +24,14 @@ class EditTodoItem implements Activity
 
 	private final GroupService groupService
 	private final ActivityNavigator activityNavigator
-	private final TodoServiceClient todoServiceClient
+	private final TodoService todoService
 
 	@Autowired
-	EditTodoItem(GroupService groupService, ActivityNavigator activityNavigator, TodoServiceClient todoServiceClient)
+	EditTodoItem(GroupService groupService, ActivityNavigator activityNavigator, TodoService todoService)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
-		this.todoServiceClient = todoServiceClient
+		this.todoService = todoService
 	}
 
 	@Override
@@ -52,7 +52,7 @@ class EditTodoItem implements Activity
 	{
 		TodoModel todoModel
 		try {
-			 todoModel = todoServiceClient.get(id)
+			 todoModel = todoService.get(id)
 		} catch (FeignException fex) {
 			if(fex.status() == 404)
 				return getStartResult([
@@ -71,7 +71,7 @@ class EditTodoItem implements Activity
 	private ActivityResult commit(ActivityResult previous)
 	{
 		try {
-			TodoModel item = todoServiceClient.save(previous.view.model.todoItem.id, previous.view.model.todoItem)
+			TodoModel item = todoService.save(previous.view.model.todoItem.id, previous.view.model.todoItem)
 			activityNavigator.redirect("TODO", [new Information(
 					Information.Type.SUCCESS, "Updated Todo Item with id ${item.id}")], [id: item.id])
 		} catch (FeignConfig.ValidationException vex) {

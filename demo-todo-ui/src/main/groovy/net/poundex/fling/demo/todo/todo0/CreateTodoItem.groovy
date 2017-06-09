@@ -6,7 +6,7 @@ import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.FeignConfig
 import net.poundex.fling.demo.todo.TodoModel
-import net.poundex.fling.demo.todo.TodoServiceClient
+import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.fx.ActionType
 import net.poundex.fling.group.GroupService
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,13 +23,13 @@ class CreateTodoItem implements Activity
 
 	private final GroupService groupService
 	private final ActivityNavigator activityNavigator
-	private final TodoServiceClient todoServiceClient
+	private final TodoService todoService
 
 	@Autowired
-	CreateTodoItem(GroupService groupService, TodoServiceClient todoServiceClient, ActivityNavigator activityNavigator) //, ActivityNavigator activityNavigator)
+	CreateTodoItem(GroupService groupService, TodoService todoService, ActivityNavigator activityNavigator) //, ActivityNavigator activityNavigator)
 	{
 		this.groupService = groupService
-		this.todoServiceClient = todoServiceClient
+		this.todoService = todoService
 		this.activityNavigator = activityNavigator
 	}
 
@@ -46,7 +46,7 @@ class CreateTodoItem implements Activity
 	private ActivityResult commit(ActivityResult previous)
 	{
 		try {
-			TodoModel item = todoServiceClient.save(previous.view.model.todoItem)
+			TodoModel item = todoService.save(previous.view.model.todoItem)
 			activityNavigator.redirect("TODO", [new Information(
 					Information.Type.SUCCESS, "Created Todo Item with id ${item.id}")], [id: item.id])
 		} catch (FeignConfig.ValidationException vex) {

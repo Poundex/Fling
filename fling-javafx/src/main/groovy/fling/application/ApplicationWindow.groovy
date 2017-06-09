@@ -3,15 +3,13 @@ package fling.application
 import groovyx.javafx.GroovyFX
 import net.poundex.fling.fx.IconBeanFactory
 import net.poundex.fling.fx.SceneGraphBuilderHolder
+import net.poundex.fling.fx.ValueObjectChooserFactory
 import net.poundex.fling.fx.cell.ListItemFactory
 import net.poundex.fling.fx.ui.main.MainGroup
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
-import org.springframework.context.event.SmartApplicationListener
 import org.springframework.stereotype.Component
-
-import javax.annotation.PostConstruct
 
 /**
  * Created by poundex on 19/05/17.
@@ -31,7 +29,6 @@ class ApplicationWindow implements ApplicationListener<ContextRefreshedEvent>
 		this.listItemFactory = listItemFactory
 	}
 
-//	@PostConstruct
 	void init()
 	{
 		Thread.start {
@@ -40,6 +37,7 @@ class ApplicationWindow implements ApplicationListener<ContextRefreshedEvent>
 				registerFactory "listItem", listItemFactory
 				registerFactory "listItem", listItemFactory
 				registerBeanFactory "icon", IconBeanFactory
+				registerBeanFactory "valueObjectChooser", ValueObjectChooserFactory
 
 				stage(title: 'Activity Runner', show: true, centerOnScreen: true) {
 					mainGroup.render(delegate)

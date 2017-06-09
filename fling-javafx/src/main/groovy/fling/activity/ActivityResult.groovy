@@ -72,9 +72,9 @@ class ActivityResult
 	{
 		return new ActivityResultBuilder().with {
 			activity(activityResult.activity)
-			activityResult.information.each {
-				information(it)
-			}
+//			activityResult.information.each {
+//				information(it)
+//			}
 			view(activityResult.view)
 			activityResult.actions.each {
 				action(it.name, it.action, it.actionType)

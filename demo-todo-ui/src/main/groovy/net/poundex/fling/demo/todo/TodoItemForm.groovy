@@ -9,6 +9,7 @@ trait TodoItemForm
 {
 	abstract Model getModel()
 
+
 	Closure todoItemForm = { Map args ->
 		boolean editable = args?.editable ?: false
 		vbox {
@@ -19,6 +20,18 @@ trait TodoItemForm
 			}
 			label(text: 'Todo Task', styleClass: ['control-label'])
 			textField(text: bind(model.todoItem.itemTextProperty()), editable: editable)
+
+			label(text: 'Category', styleClass: ['control-label'])
+//			textField(text: bind(model.todoItem.category.nameProperty()), editable: editable)
+
+//			valueObjectChooser(theValue: bind(model.todoItem.categoryProperty()),
+//				items: model.categories)
+
+			choiceBox(value: bind(model.todoItem.categoryProperty()),
+				items: model.categories, disable: ! editable)
+
+			label(text: 'Complete', styleClass: ['control-label'])
+			checkBox(selected: bind(model.todoItem.completeProperty()), disable: ! editable)
 		}
 	}
 }

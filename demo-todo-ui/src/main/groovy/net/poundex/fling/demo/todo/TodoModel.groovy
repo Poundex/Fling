@@ -9,4 +9,7 @@ class TodoModel
 {
 	Long id
 	@FXBindable String itemText
+	@FXBindable Boolean complete
+
+	@FXBindable CategoryModel category = new CategoryModel()
 }

@@ -3,11 +3,9 @@ package net.poundex.fling.demo
 import grails.rest.Resource
 
 @Resource
-class TodoItem
+class Category
 {
-    String itemText
-    boolean complete = false
-    Category category
+    String name
 
     static constraints = {
     }
