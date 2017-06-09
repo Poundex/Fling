@@ -8,7 +8,7 @@ import fling.util.springerrors.SpringValidationErrorsHandler
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -21,14 +21,14 @@ class CreateTodoItem implements Activity, SpringValidationErrorsHandler
 	final String name = 'TODO0'
 	final String title = 'Create Todo Item'
 
-	private final GroupService groupService
+	private final ComponentService componentService
 	private final ActivityNavigator activityNavigator
 	private final TodoService todoService
 
 	@Autowired
-	CreateTodoItem(GroupService groupService, TodoService todoService, ActivityNavigator activityNavigator) //, ActivityNavigator activityNavigator)
+	CreateTodoItem(ComponentService componentService, TodoService todoService, ActivityNavigator activityNavigator) //, ActivityNavigator activityNavigator)
 	{
-		this.groupService = groupService
+		this.componentService = componentService
 		this.todoService = todoService
 		this.activityNavigator = activityNavigator
 	}
@@ -39,7 +39,7 @@ class CreateTodoItem implements Activity, SpringValidationErrorsHandler
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(CreateTodoItemGroup)).
+				view(componentService.create(CreateTodoItemComponent)).
 				action('Save', this.&commit, ActionType.PRIMARY).build()
 	}
 

@@ -9,7 +9,7 @@ import fling.util.springerrors.SpringValidationErrorsHandler
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -22,12 +22,12 @@ class EditTodoItem implements Activity, SpringValidationErrorsHandler
 	final String name = "TODO1"
 	final String title = "Edit Todo Item"
 
-	private final GroupService groupService
+	private final ComponentService groupService
 	private final ActivityNavigator activityNavigator
 	private final TodoService todoService
 
 	@Autowired
-	EditTodoItem(GroupService groupService, ActivityNavigator activityNavigator, TodoService todoService)
+	EditTodoItem(ComponentService groupService, ActivityNavigator activityNavigator, TodoService todoService)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
@@ -63,7 +63,7 @@ class EditTodoItem implements Activity, SpringValidationErrorsHandler
 				builder().
 				activity(this).
 				action('Save', this.&commit, ActionType.PRIMARY).
-				view(groupService.create(EditTodoItemGroup,
+				view(groupService.create(EditTodoItemComponent,
 						{ EditTodoItemModel model -> model.todoItem = todoModel })).
 				build()
 	}

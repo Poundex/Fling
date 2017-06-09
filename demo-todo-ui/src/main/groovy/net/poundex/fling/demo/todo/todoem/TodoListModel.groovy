@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 22/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class TodoListModel extends Model
 {
 	ObservableList<TodoModel> todoItems = FXCollections.observableList([])

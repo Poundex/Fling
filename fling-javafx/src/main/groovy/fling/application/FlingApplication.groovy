@@ -19,7 +19,7 @@ abstract class FlingApplication
 				'net.poundex.fling.fx.ui',
 				'net.poundex.fling.fx.cell',
 				'net.poundex.fling.activity',
-				'net.poundex.fling.group',
+				'net.poundex.fling.component',
 				*basePackages)
 		ctx.refresh()
 	}

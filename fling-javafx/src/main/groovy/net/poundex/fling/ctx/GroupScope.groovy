@@ -1,6 +1,5 @@
 package net.poundex.fling.ctx
 
-import fling.ui.Group
 import org.springframework.beans.factory.ObjectFactory
 import org.springframework.beans.factory.config.Scope
 
@@ -9,14 +8,14 @@ import org.springframework.beans.factory.config.Scope
  */
 class GroupScope implements Scope
 {
-	static final String GROUP_SCOPE = 'group'
+	static final String GROUP_SCOPE = 'component'
 
 	private final Map<UUID, Map<String, Object>> groups = [:].withDefault { [:] }
 
 	@Override
 	Object get(String name, ObjectFactory<?> objectFactory)
 	{
-		groups[GroupContextHolder.currentContext].with {
+		groups[ComponentContextHolder.currentContext].with {
 			if ( ! get(name))
 				put(name, objectFactory.getObject())
 			return get(name)

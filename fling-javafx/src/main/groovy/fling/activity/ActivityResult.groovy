@@ -1,6 +1,6 @@
 package fling.activity
 
-import fling.ui.Group
+import fling.ui.Component
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.SimpleType
 import net.poundex.fling.fx.ActionType
@@ -10,12 +10,12 @@ import net.poundex.fling.fx.ActionType
  */
 class ActivityResult
 {
-	final Group view
+	final Component view
 	final Activity activity
 	final List<Action> actions
 	final List<Information> information
 
-	private ActivityResult(Group view, Activity activity, List<Action> actions, List<Information> information)
+	private ActivityResult(Component view, Activity activity, List<Action> actions, List<Information> information)
 	{
 		this.view = view
 		this.activity = activity
@@ -25,12 +25,12 @@ class ActivityResult
 
 	static class ActivityResultBuilder
 	{
-		private Group view
+		private Component view
 		private Activity activity
 		private List<Action> actions = []
 		private List<Information> information = []
 
-		ActivityResultBuilder view(Group view)
+		ActivityResultBuilder view(Component view)
 		{
 			this.view = view
 			return this

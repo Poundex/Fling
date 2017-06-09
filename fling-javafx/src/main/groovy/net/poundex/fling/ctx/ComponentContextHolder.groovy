@@ -3,7 +3,7 @@ package net.poundex.fling.ctx
 /**
  * Created by poundex on 20/05/17.
  */
-class GroupContextHolder
+class ComponentContextHolder
 {
 	private static final ThreadLocal<UUID> group = new ThreadLocal<>()
 

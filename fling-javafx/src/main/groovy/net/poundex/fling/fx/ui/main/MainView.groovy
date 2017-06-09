@@ -1,10 +1,8 @@
 package net.poundex.fling.fx.ui.main
 
 import fling.ui.View
-import groovyx.javafx.SceneGraphBuilder
-import javafx.scene.layout.BorderPane
-import net.poundex.fling.fx.ui.activitylist.ActivityListGroup
-import net.poundex.fling.fx.ui.activityview.ActivityViewGroup
+import net.poundex.fling.fx.ui.activitylist.ActivityListComponent
+import net.poundex.fling.fx.ui.activityview.ActivityViewComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -14,11 +12,11 @@ import org.springframework.stereotype.Component
 @Component
 class MainView extends View<MainModel, MainController>
 {
-	private final ActivityListGroup activityListGroup
-	private final ActivityViewGroup activityViewGroup
+	private final ActivityListComponent activityListGroup
+	private final ActivityViewComponent activityViewGroup
 
 	@Autowired
-	MainView(MainModel model, MainController controller, ActivityListGroup activityListGroup, ActivityViewGroup activityViewGroup)
+	MainView(MainModel model, MainController controller, ActivityListComponent activityListGroup, ActivityViewComponent activityViewGroup)
 	{
 		super(model, controller)
 		this.activityListGroup = activityListGroup

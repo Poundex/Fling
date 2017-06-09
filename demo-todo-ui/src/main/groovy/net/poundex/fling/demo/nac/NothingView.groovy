@@ -1,8 +1,6 @@
 package net.poundex.fling.demo.nac
 
 import fling.ui.View
-import groovyx.javafx.SceneGraphBuilder
-import net.poundex.fling.ctx.GroupScope
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 19/05/17.
  */
-@Component @Scope('group')
+@Component @Scope('component')
 class NothingView extends View<NothingModel, NothingController>
 {
 	@Autowired

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 26/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class InformationController extends Controller<InformationModel>
 {
 	@Autowired

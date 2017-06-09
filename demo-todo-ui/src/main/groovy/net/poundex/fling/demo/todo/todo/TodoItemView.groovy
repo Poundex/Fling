@@ -7,7 +7,7 @@ import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoService
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -20,12 +20,12 @@ class TodoItemView implements Activity
 	final String name = "TODO"
 	final String title = "Todo Item"
 
-	private final GroupService groupService
+	private final ComponentService groupService
 	private final ActivityNavigator activityNavigator
 	private final TodoService todoService
 
 	@Autowired
-	TodoItemView(GroupService groupService, ActivityNavigator activityNavigator, TodoService todoService)
+	TodoItemView(ComponentService groupService, ActivityNavigator activityNavigator, TodoService todoService)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
@@ -62,7 +62,7 @@ class TodoItemView implements Activity
 				activity(this).
 				action('Edit', { activityNavigator.start("TODO1", [id: id]) }).
 				action('Delete', { activityNavigator.start("TODO2", [id: id]) }).
-				view(groupService.create(TodoItemViewGroup,
+				view(groupService.create(TodoItemViewComponent,
 						{ TodoItemViewModel model -> model.todoItem = todoModel })).
 				build()
 	}

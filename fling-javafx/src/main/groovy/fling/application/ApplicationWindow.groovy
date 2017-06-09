@@ -5,7 +5,7 @@ import net.poundex.fling.fx.IconBeanFactory
 import net.poundex.fling.fx.SceneGraphBuilderHolder
 import net.poundex.fling.fx.ValueObjectChooserFactory
 import net.poundex.fling.fx.cell.ListItemFactory
-import net.poundex.fling.fx.ui.main.MainGroup
+import net.poundex.fling.fx.ui.main.MainComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component
 @Component
 class ApplicationWindow implements ApplicationListener<ContextRefreshedEvent>
 {
-	private final MainGroup mainGroup
+	private final MainComponent mainGroup
 	private final SceneGraphBuilderHolder sceneGraphBuilderHolder
 	private final ListItemFactory listItemFactory
 	
 	@Autowired
-	ApplicationWindow(MainGroup mainGroup, SceneGraphBuilderHolder sceneGraphBuilderHolder, ListItemFactory listItemFactory)
+	ApplicationWindow(MainComponent mainGroup, SceneGraphBuilderHolder sceneGraphBuilderHolder, ListItemFactory listItemFactory)
 	{
 		this.mainGroup = mainGroup
 		this.sceneGraphBuilderHolder = sceneGraphBuilderHolder

@@ -1,7 +1,5 @@
 package net.poundex.fling.demo.nac
 
-import fling.ui.Controller
-import net.poundex.fling.ctx.GroupScope
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
@@ -9,12 +7,13 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 19/05/17.
  */
+//@InheritConstructors
 @Component @Scope("component")
-class NothingController extends Controller<NothingModel>
+class NothingComponent extends fling.ui.Component<NothingController, NothingView, NothingModel>
 {
 	@Autowired
-	NothingController(NothingModel model)
+	NothingComponent(NothingController controller, NothingView view, NothingModel model)
 	{
-		super(model)
+		super(controller, view, model)
 	}
 }

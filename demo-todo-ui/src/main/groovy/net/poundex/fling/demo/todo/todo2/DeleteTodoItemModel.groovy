@@ -1,6 +1,5 @@
 package net.poundex.fling.demo.todo.todo2
 
-import fling.ui.Group
 import fling.ui.Model
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
@@ -8,8 +7,8 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 28/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class DeleteTodoItemModel extends Model
 {
-	Group summary
+	fling.ui.Component summary
 }

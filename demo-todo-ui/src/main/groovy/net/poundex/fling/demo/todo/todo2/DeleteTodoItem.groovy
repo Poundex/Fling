@@ -6,7 +6,7 @@ import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.demo.todo.TodoServiceClient
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -20,11 +20,11 @@ class DeleteTodoItem implements Activity
 	final String title = "Delete Todo Item"
 
 	private final ActivityNavigator activityNavigator
-	private final GroupService groupService
+	private final ComponentService groupService
 	private final TodoServiceClient todoServiceClient
 
 	@Autowired
-	DeleteTodoItem(ActivityNavigator activityNavigator, GroupService groupService, TodoServiceClient todoServiceClient)
+	DeleteTodoItem(ActivityNavigator activityNavigator, ComponentService groupService, TodoServiceClient todoServiceClient)
 	{
 		this.activityNavigator = activityNavigator
 		this.groupService = groupService
@@ -56,7 +56,7 @@ class DeleteTodoItem implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(DeleteTodoItemGroup, { DeleteTodoItemModel model ->
+				view(groupService.create(DeleteTodoItemComponent, { DeleteTodoItemModel model ->
 					model.summary = summary.view
 				})).
 				action("Cancel", { activityNavigator.redirect('TODO', [

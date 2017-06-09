@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 /**
  * Created by poundex on 19/05/17.
  */
-abstract class Group<C extends Controller, V extends View, M extends Model>
+abstract class Component<C extends Controller, V extends View, M extends Model>
 {
 	final UUID id
 
@@ -15,7 +15,7 @@ abstract class Group<C extends Controller, V extends View, M extends Model>
 	final M model
 
 	@Autowired
-	Group(C controller, V view, M model)
+	Component(C controller, V view, M model)
 	{
 		this.id = UUID.randomUUID()
 

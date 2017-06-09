@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 28/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class ParamEntryView extends View<ParamEntryModel, ParamEntryController>
 {
 	@Autowired

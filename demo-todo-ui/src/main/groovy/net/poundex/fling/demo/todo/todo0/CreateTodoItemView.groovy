@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 25/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class CreateTodoItemView extends View<CreateTodoItemModel, CreateTodoItemController> implements TodoItemForm
 {
 	private final CategoryServiceClient categoryServiceClient

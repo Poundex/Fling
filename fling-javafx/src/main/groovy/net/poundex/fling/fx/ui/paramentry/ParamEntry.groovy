@@ -5,7 +5,7 @@ import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import javafx.beans.property.SimpleStringProperty
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -18,11 +18,11 @@ class ParamEntry implements Activity
 	final String name = "!!PARAMS"
 	final String title = "Parameters"
 
-	private final GroupService groupService
+	private final ComponentService groupService
 	private final ActivityNavigator activityNavigator
 
 	@Autowired
-	ParamEntry(GroupService groupService, ActivityNavigator activityNavigator)
+	ParamEntry(ComponentService groupService, ActivityNavigator activityNavigator)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
@@ -34,7 +34,7 @@ class ParamEntry implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(ParamEntryGroup, { ParamEntryModel model ->
+				view(groupService.create(ParamEntryComponent, { ParamEntryModel model ->
 					args.params.each { String paramName, Map<String, ?> paramProps ->
 						model.params[paramName] = paramProps
 						model.paramValues[paramName] = new SimpleStringProperty("")

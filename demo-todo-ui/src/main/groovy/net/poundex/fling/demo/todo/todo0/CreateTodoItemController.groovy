@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 25/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class CreateTodoItemController extends Controller<CreateTodoItemModel>
 {
 	@Autowired

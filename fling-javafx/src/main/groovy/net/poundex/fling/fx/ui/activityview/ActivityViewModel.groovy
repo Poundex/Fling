@@ -12,11 +12,11 @@ import javafx.scene.layout.VBox
 import net.poundex.fling.activity.ActivityService
 import net.poundex.fling.activity.PreparedAction
 import net.poundex.fling.fx.ui.form.FormModel
-import net.poundex.fling.fx.ui.information.InformationGroup
+import net.poundex.fling.fx.ui.information.InformationComponent
 import net.poundex.fling.fx.ui.information.InformationModel
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import net.poundex.fling.fx.SceneGraphBuilderHolder
-import net.poundex.fling.fx.ui.form.FormGroup
+import net.poundex.fling.fx.ui.form.FormComponent
 import org.springframework.beans.factory.ObjectFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -34,12 +34,12 @@ class ActivityViewModel extends Model
 
 	private final ActivityService activityService
 	private final SceneGraphBuilderHolder sceneGraphBuilderHolder
-	private final ObjectFactory<FormGroup> formGroupFactory
-	private final GroupService groupService
+	private final ObjectFactory<FormComponent> formGroupFactory
+	private final ComponentService groupService
 
 
 	@Autowired
-	ActivityViewModel(ActivityService activityService, SceneGraphBuilderHolder sceneGraphBuilderHolder, ObjectFactory<FormGroup> formGroupFactory, GroupService groupService)
+	ActivityViewModel(ActivityService activityService, SceneGraphBuilderHolder sceneGraphBuilderHolder, ObjectFactory<FormComponent> formGroupFactory, ComponentService groupService)
 	{
 		this.activityService = activityService
 		this.sceneGraphBuilderHolder = sceneGraphBuilderHolder
@@ -60,7 +60,7 @@ class ActivityViewModel extends Model
 
 	void onActivityResult(ActivityResult activityResult)
 	{
-		FormGroup formCard = groupService.create(FormGroup) { FormModel model ->
+		FormComponent formCard = groupService.create(FormComponent) { FormModel model ->
 			model.actions = activityResult.actions.collect {
 				new PreparedAction(it, activityResult)
 			}
@@ -69,7 +69,7 @@ class ActivityViewModel extends Model
 		formCard.model.cardContent = activityResult.view
 		VBox content = new VBox(25)
 		activityResult.information.each { Information information ->
-			InformationGroup group = groupService.create(InformationGroup, { InformationModel model ->
+			InformationComponent group = groupService.create(InformationComponent, { InformationModel model ->
 				model.information = information
 			})
 			Node panel = group.render(sceneGraphBuilderHolder.sceneGraphBuilder)

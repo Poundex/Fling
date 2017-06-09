@@ -4,7 +4,7 @@ import fling.activity.Activity
 import fling.activity.ActivityResult
 import fling.activity.Information
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -17,10 +17,10 @@ class NothingActivity implements Activity
 	final String name = 'NOOP'
 	final String title = 'Do Nothing'
 
-	private final GroupService groupService
+	private final ComponentService groupService
 
 	@Autowired
-	NothingActivity(GroupService groupService)
+	NothingActivity(ComponentService groupService)
 	{
 		this.groupService = groupService
 	}
@@ -31,7 +31,7 @@ class NothingActivity implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(NothingGroup)).
+				view(groupService.create(NothingComponent)).
 				information(new Information(
 						Information.Type.INFO, "Information")).
 				information(new Information(

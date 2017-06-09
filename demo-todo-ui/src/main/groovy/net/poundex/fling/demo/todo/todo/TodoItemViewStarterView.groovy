@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 /**
  * Created by poundex on 22/05/17.
  */
-@Component @Scope("group")
+@Component @Scope("component")
 class TodoItemViewStarterView extends View<TodoItemViewStarterModel, TodoItemViewStarterController>
 {
 	@Autowired

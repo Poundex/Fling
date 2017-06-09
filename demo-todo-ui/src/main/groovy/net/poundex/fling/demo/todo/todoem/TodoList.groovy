@@ -5,7 +5,7 @@ import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import net.poundex.fling.demo.todo.TodoServiceClient
 import net.poundex.fling.fx.ActionType
-import net.poundex.fling.group.GroupService
+import net.poundex.fling.component.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -18,12 +18,12 @@ class TodoList implements Activity
 	final String name = "TODOEM"
 	final String title = "Todo List"
 
-	private final GroupService groupService
+	private final ComponentService groupService
 	private final ActivityNavigator activityNavigator
 	private final TodoServiceClient todoServiceClient
 
 	@Autowired
-	TodoList(GroupService groupService, ActivityNavigator activityNavigator, TodoServiceClient todoServiceClient)
+	TodoList(ComponentService groupService, ActivityNavigator activityNavigator, TodoServiceClient todoServiceClient)
 	{
 		this.groupService = groupService
 		this.activityNavigator = activityNavigator
@@ -36,7 +36,7 @@ class TodoList implements Activity
 		return ActivityResult.
 				builder().
 				activity(this).
-				view(groupService.create(TodoListGroup, { TodoListModel model ->
+				view(groupService.create(TodoListComponent, { TodoListModel model ->
 					model.todoItems.addAll(todoServiceClient.index())
 				})).
 				action('Create', this.&create, ActionType.PRIMARY).
