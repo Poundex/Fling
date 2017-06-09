@@ -23,7 +23,7 @@ class ActivityResult
 		this.information = information
 	}
 
-	private static class ActivityResultBuilder
+	static class ActivityResultBuilder
 	{
 		private Group view
 		private Activity activity

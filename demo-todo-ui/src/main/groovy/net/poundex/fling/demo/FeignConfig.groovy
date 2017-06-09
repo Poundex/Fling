@@ -5,6 +5,7 @@ import feign.Response
 import feign.codec.ErrorDecoder
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
+import fling.util.springerrors.ValidationException
 import groovy.json.JsonSlurper
 import net.poundex.fling.demo.todo.CategoryServiceClient
 import net.poundex.fling.demo.todo.TodoServiceClient
@@ -54,15 +55,6 @@ class FeignConfig
 		}
 	}
 
-	static class ValidationException extends RuntimeException
-	{
-		final List errors
 
-		ValidationException(List errors)
-		{
-			super("Validation errors")
-			this.errors = errors
-		}
-	}
 
 }

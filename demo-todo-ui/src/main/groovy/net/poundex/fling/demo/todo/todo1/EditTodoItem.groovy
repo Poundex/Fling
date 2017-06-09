@@ -5,7 +5,7 @@ import fling.activity.Activity
 import fling.activity.ActivityNavigator
 import fling.activity.ActivityResult
 import fling.activity.Information
-import net.poundex.fling.demo.FeignConfig
+import fling.util.springerrors.SpringValidationErrorsHandler
 import net.poundex.fling.demo.todo.TodoModel
 import net.poundex.fling.demo.todo.TodoService
 import net.poundex.fling.fx.ActionType
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component
  * Created by poundex on 22/05/17.
  */
 @Component
-class EditTodoItem implements Activity
+class EditTodoItem implements Activity, SpringValidationErrorsHandler
 {
 	final String name = "TODO1"
 	final String title = "Edit Todo Item"
@@ -70,15 +70,10 @@ class EditTodoItem implements Activity
 
 	private ActivityResult commit(ActivityResult previous)
 	{
-		try {
+		handlingSpringErrors(ActivityResult.builder(previous)) {
 			TodoModel item = todoService.save(previous.view.model.todoItem.id, previous.view.model.todoItem)
 			activityNavigator.redirect("TODO", [new Information(
 					Information.Type.SUCCESS, "Updated Todo Item with id ${item.id}")], [id: item.id])
-		} catch (FeignConfig.ValidationException vex) {
-			activityNavigator.refresh ActivityResult.builder(previous).with {
-				vex.errors.each { err -> information(new Information(Information.Type.ERROR, err.message)) }
-				it
-			}.build()
 		}
 	}
 }
