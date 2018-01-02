@@ -29,3 +29,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 */
+
+
+allprojects {
+	group 'net.poundex.fling'
+	version '0.1.0-SNAPSHOT'
+}

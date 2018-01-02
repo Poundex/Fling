@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
 	compile 'org.codehaus.groovy:groovy-all:2.4.3' // TODO all versions
-	compile 'org.springframework:spring-context:4.1.7.RELEASE' // TODO
+	compile 'org.springframework:spring-context:4.3.10.RELEASE'
 //	compile 'org.codehaus.groovyfx:groovyfx:0.4.0'
 	compile 'com.github.groovyfx-project:groovyfx:master-SNAPSHOT'
 

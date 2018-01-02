@@ -8,14 +8,14 @@ import net.poundex.fling.fx.ActionType
 /**
  * Created by poundex on 24/05/17.
  */
-class ActivityResult
+class ActivityResult<T extends Component>
 {
-	final Component view
+	final T view
 	final Activity activity
 	final List<Action> actions
 	final List<Information> information
 
-	private ActivityResult(Component view, Activity activity, List<Action> actions, List<Information> information)
+	private ActivityResult(T view, Activity activity, List<Action> actions, List<Information> information)
 	{
 		this.view = view
 		this.activity = activity
@@ -23,14 +23,14 @@ class ActivityResult
 		this.information = information
 	}
 
-	static class ActivityResultBuilder
+	static class ActivityResultBuilder<T extends Component>
 	{
-		private Component view
+		private T view
 		private Activity activity
 		private List<Action> actions = []
 		private List<Information> information = []
 
-		ActivityResultBuilder view(Component view)
+		ActivityResultBuilder view(T view)
 		{
 			this.view = view
 			return this
@@ -57,15 +57,15 @@ class ActivityResult
 			return this
 		}
 
-		ActivityResult build()
+		ActivityResult<T> build()
 		{
 			return new ActivityResult(view, activity, actions, information)
 		}
 	}
 
-	static ActivityResultBuilder builder()
+	static ActivityResultBuilder<T> builder()
 	{
-		return new ActivityResultBuilder()
+		return new ActivityResultBuilder<T>()
 	}
 
 	static ActivityResultBuilder builder(ActivityResult activityResult)
